@@ -7,15 +7,31 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
 
-        int[] arr1 = {5, 2, 3, 2, 3};
-        int[] arr2 = {-1, -1, -2, -2, -3};
+        int[] arr1 = {5, 2, 9, 1, 7};
+        int[] arr2 = {-10, 0, 100, -50, 20};
 
-        findNonDuplicateElement(arr2);
+        findMaximumMinimumSum(arr2);
+
 
     }
 
 
-    /*program to find non-duplicate element in the array*/
+    /*program to find the sum of maximum and minimum element in an array*/
+    static void findMaximumMinimumSum(int[] arr){
+        int max = -99999999;
+        int min = 99999999;
+
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] > max){
+                max = arr[i];
+            } else if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        System.out.println("Sum of the maximum and minimum element is " + (max+min));
+    }
+
+    /*program to find non-duplicate element in the array
     static void findNonDuplicateElement(int[] arr) {
         int count = 0;
         int number = -999999999;
@@ -42,5 +58,5 @@ public class Main {
             System.out.println("Non - Duplicate Element is: " + number);
         }
 
-    }
+    }*/
 }
