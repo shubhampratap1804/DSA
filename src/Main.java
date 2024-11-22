@@ -1,22 +1,40 @@
 import java.awt.desktop.SystemSleepEvent;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        int[] arr1 = {5, 2, 9, 1, 7};
-        int[] arr2 = {-10, 0, 100, -50, 20};
+        int[] a = {1,2,3,4,5};
+        int[] b = {4,5,6,7,8};
 
-        findMaximumMinimumSum(arr2);
+        findIntersectionOfArrays(a,b);
 
 
     }
 
+    /*program to find intersection of two-array*/
 
-    /*program to find the sum of maximum and minimum element in an array*/
+    static void findIntersectionOfArrays(int[] a, int[] b){
+        ArrayList<Number> intersection = new ArrayList<>();
+        Set<Integer> myset = new HashSet<>();
+
+        for (int j : a) {
+            myset.add(j);
+        }
+
+        for (int j : b) {
+            if (myset.contains(j)) {
+                intersection.add(j);
+                myset.remove(j);
+            }
+        }
+
+        System.out.println("Intersection elements are : " + intersection.toString());
+    }
+
+    /*program to find the sum of maximum and minimum element in an array
     static void findMaximumMinimumSum(int[] arr){
         int max = -99999999;
         int min = 99999999;
@@ -29,7 +47,7 @@ public class Main {
             }
         }
         System.out.println("Sum of the maximum and minimum element is " + (max+min));
-    }
+    }*/
 
     /*program to find non-duplicate element in the array
     static void findNonDuplicateElement(int[] arr) {
