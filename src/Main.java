@@ -6,16 +6,35 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        int[] a = {1,2,3,4,5};
-        int[] b = {4,5,6,7,8};
+        int[] a = {2,4,6,8,10};
+        int sum = 12;
+        findPairOfSum(a, sum);
 
-        findIntersectionOfArrays(a,b);
 
 
     }
+    /*program to find pair equal to SUM*/
+    static void findPairOfSum(int[] arr, int sum){
+        List<List<Integer>> pairList = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if(arr[i] + arr[j] == sum){
+                    List<Integer> row = new ArrayList<>();
+                    row.add(arr[i]);
+                    row.add(arr[j]);
+                    pairList.add(row);
+                }
+            }
+        }
+if(!pairList.isEmpty()){
+    System.out.println("Pairs Found, " + pairList.toString());
+}else {
+    System.out.println("Sorry ! No pair exists.");
+}
+    }
 
-    /*program to find intersection of two-array*/
 
+    /*program to find intersection of two-array
     static void findIntersectionOfArrays(int[] a, int[] b){
         ArrayList<Number> intersection = new ArrayList<>();
         Set<Integer> myset = new HashSet<>();
@@ -32,7 +51,7 @@ public class Main {
         }
 
         System.out.println("Intersection elements are : " + intersection.toString());
-    }
+    }*/
 
     /*program to find the sum of maximum and minimum element in an array
     static void findMaximumMinimumSum(int[] arr){
