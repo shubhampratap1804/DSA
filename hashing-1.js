@@ -1,7 +1,34 @@
 const prompt = require('prompt-sync')({ sigint: true });
 
+function longestEqualOnesAndZeroes(){
+    const input = prompt("Enter an array of 0's and 1's sepeated by a space: ");
+    const arr = input.split(" ").map(nums => Number(nums.trim()));
+    //console.log("arr", arr);
+
+    const map = new Map();
+    let sum = 0;
+    let maxLength = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i] === 1 ? 1 : -1;
+        if(sum === 0){
+            maxLength = i + 1;
+        }else if(map.has(sum)){
+            maxLength = Math.max(maxLength, i - map.get(sum));
+        }else{
+            map.set(sum, i);
+        }
+    }
+    console.log("Maximum length of equal number os 0's and 1's is :", maxLength);
+}
+
+longestEqualOnesAndZeroes();
 
 
+
+
+
+/*
 function longestPalindromicSubString(){
 
     const string = prompt("Enter the string to get longest substring : ");
@@ -68,126 +95,6 @@ let maxLength = 0;
     }
     console.log("Maximum consecutive number length is : ", maxLength);
 }
-
-longestNumberConsecutiveSubarray();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function longestConsecutiveSubarray(){
-//     const enteredValue = prompt("Enter a comma seperated array");
-//     const arr = enteredValue.split(",");
-//     let array = Array.from(arr);
-
-//     if(array.length == 0 || array == ''){
-//         return 0;
-//     }
-
-//     const map = new Map();
-//     for(let nums in arr){
-//         map.set(nums, true);
-//     }
-
-//     let maxLength = 0;
-
-//     for(let nums in arr){
-//         if(!map.has(nums - 1)){
-//             let currentNum = nums;
-//             let currentLength = 1;
-//             while(map.has(currentNum + 1)){
-//                 currentNum += 1;
-//                 currentLength += 1;
-//             }
-//             maxLength = Math.max(maxLength, currentLength);
-//         }
-//     }
-// }
-
-// let result = longestConsecutiveSubarray();
-// console.log("Result", result);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //cuckoo algorithm
 /*
