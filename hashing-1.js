@@ -1,6 +1,59 @@
 const prompt = require('prompt-sync')({ sigint: true });
 
-function longestEqualOnesAndZeroes(){
+
+
+function longestEqualVowelsAndConsonants(){
+
+    //a set of vowels upper & lowercase to avoid bigger if or switch block
+    const vowels = new Set(['a','e','i','o','u','A','E','I','O','U']);
+
+    const input = prompt("Enter a String: ");
+    //removing unnecessary spaces
+    const arr = input.split("").map(nums => (nums.trim()));
+    console.log("arr", arr);
+    
+    const map = new Map();
+    let sum = 0;
+    let maxLength = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        //console.log("arr[i] ", arr[i]);
+        //console.log("vowels.has(arr[i]) ", vowels.has(arr[i]));
+        
+        //increasing sum by 1 if current character is a vowel
+        if(vowels.has(arr[i])){
+            sum = sum + 1;
+        //decrementing sum by 1 if current character is a consonant
+        }else if(/[a-zA-Z]/.test(arr[i])){
+            sum = sum - 1;
+        /*if map contains a sum which preciously had occur then the current substring is
+        containg equal number of vowels and consonant, update max length*/ 
+        }if(map.has(sum)){
+            maxLength = Math.max(maxLength, i - map.get(sum));
+        }else{
+        //insert commulative sum if doen't exists
+            map.set(sum, i);
+        }
+    }
+    console.log("Longest equal number of vowels and consonants are :", maxLength);
+}
+
+longestEqualVowelsAndConsonants();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*function longestEqualOnesAndZeroes(){
     const input = prompt("Enter an array of 0's and 1's sepeated by a space: ");
     const arr = input.split(" ").map(nums => Number(nums.trim()));
     //console.log("arr", arr);
