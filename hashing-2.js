@@ -1,6 +1,62 @@
 const prompt = require('prompt-sync')({sigint : true});
 
 
+function gcd(a, b) {
+    while (b !== 0) {
+        let temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+
+function normaliseSlope(dx, dy){
+    //x-component is same means its a vertical line
+    if(dx === 0) return [1,0];
+     //y-component is same means its means a horizontle line 
+    if(dy === 0) return [0,1];
+
+    const g = gcd(dx, dy);
+    return[dy/g, dx/g];
+}
+
+function maximumStraightLinePoints(){
+    const points = [[1, 1], [2, 2], [3, 3], [4, 5], [5, 6], [6, 7]];
+
+    let maxPoints = 1;
+    for (let i = 0; i < points.length; i++) {
+        let slopes = new Map();
+        let duplicates = 0;
+        let currentMax = 0;
+
+        for (let j = i + 1; j < points.length; j++) {
+           if(points[i][0] === points[j][0] && points[i][1] === points[j][1]){
+            duplicates++;
+            continue;
+           }
+            
+           let dx = points[j][0] - points[i][0];
+           let dy = points[j][1] - points[i][1];
+
+           let slope = normaliseSlope(dx, dy);
+           slopes.set(slope.toString(), (slopes.get(slope.toString()) || 0) + 1);
+           currentMax = Math.max(currentMax, slopes.get(slope.toString()));
+        }
+        maxPoints = Math.max(maxPoints, currentMax + duplicates + 1);
+    }
+    console.log("Maximum points in a Straight line are : ", maxPoints);
+}
+
+
+
+
+maximumStraightLinePoints();
+
+
+
+
+
 
 
 /*Given an array of integers and a target sum, find all unique quadruplets in the array that 
@@ -79,7 +135,7 @@ Sample Output [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]
 /**
  3. Quadruplets
  */
-
+/*
  function targetSumQuadruplets(target){
 
     const array = [1,6,2,8,3,2,1,5,9,4,6,8,1];
