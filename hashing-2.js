@@ -1,6 +1,64 @@
 const prompt = require('prompt-sync')({sigint : true});
 
 
+function minimumWindowAllString(ss, tt){
+
+    const s = ss.split("");
+    const t = tt.split("");
+    
+    const tCount = new Map();
+    for(let char of t){
+        tCount.set(char, (tCount.get(char) || 0) + 1);
+    }
+
+    const windowCount = new Map();
+    let left = 0, right = 0;
+    let formed = 0;
+    let required = tCount.size;
+    let minLength = Infinity, start = 0;
+
+    while(right < s.length){
+        const char = s[right];
+        windowCount.set(char, (tCount.get(char) || 0) + 1);
+
+        if(tCount.has(char) && windowCount.get(char) === tCount.get(char)){
+            formed++;
+        }
+
+        while(left <= right && formed === required){
+            const currentChar = s[left];
+            if(right - left + 1 < minLength){
+                minLength = right - left + 1;
+                start = left;
+            }
+
+            windowCount.set(currentChar, windowCount.get(currentChar) - 1);
+            if(tCount.has(currentChar) && windowCount.get(currentChar) === tCount.get(currentChar)){
+                formed--;
+            }
+            
+            left++;
+        }
+
+        right++;
+    }
+    return minLength === Infinity ? "" : s.substring(start, start + minLength);
+
+}
+
+
+console.log("result ",minimumWindowAllString("ADOBECODEBANC", "ABC"));
+
+
+
+
+
+
+
+
+
+
+/*
 function gcd(a, b) {
     while (b !== 0) {
         let temp = b;
